@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Viriathus · Gestión de Inventario</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+      <div class="brand">
+        <span class="brand-name">VIRIATHUS</span>
+        <span class="brand-subtitle">
+          Gestión de inventario
+        </span>
+      </div>
+
+      <div class="header-status">
+        INVENTARIO
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO PRINCIPAL
+  ====================================================== -->
+
+  <main class="app-container">
+
+    <!-- ===================================================
+         PANTALLA PRINCIPAL
+    ==================================================== -->
+
+    <section id="homeScreen" class="screen active">
+
+      <div class="page-heading">
+
+        <span class="eyebrow">
+          GESTIÓN DE PIEZAS
+        </span>
+
+        <h1>
+          Inventario
+        </h1>
+
+        <p>
+          Registra nuevas piezas o consulta y modifica
+          las piezas existentes.
+        </p>
+
+      </div>
+
+
+      <div class="action-grid">
+
+        <!-- NUEVA PIEZA -->
+
+        <button
+          type="button"
+          class="action-card"
+          id="newPieceButton"
+        >
+
+          <span class="action-icon">
+            +
+          </span>
+
+          <span class="action-content">
+
+            <strong>
+              Nueva pieza
+            </strong>
+
+            <small>
+              Registrar una pieza nueva en inventario
+            </small>
+
+          </span>
+
+          <span class="action-arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <!-- EDITAR PIEZA -->
+
+        <button
+          type="button"
+          class="action-card"
+          id="editPieceButton"
+        >
+
+          <span class="action-icon">
+            ✎
+          </span>
+
+          <span class="action-content">
+
+            <strong>
+              Editar pieza
+            </strong>
+
+            <small>
+              Buscar y modificar una pieza existente
+            </small>
+
+          </span>
+
+          <span class="action-arrow">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         BUSCADOR
+    ==================================================== -->
+
+    <section
+      id="searchScreen"
+      class="screen"
+    >
+
+      <button
+        type="button"
+        class="back-button"
+        id="backFromSearch"
+      >
+        ← Volver
+      </button>
+
+
+      <div class="page-heading">
+
+        <span class="eyebrow">
+          INVENTARIO
+        </span>
+
+        <h1>
+          Buscar pieza
+        </h1>
+
+        <p>
+          Busca una pieza por SKU o nombre.
+        </p>
+
+      </div>
+
+
+      <div class="search-box">
+
+        <input
+          type="search"
+          id="pieceSearch"
+          placeholder="Ej. VIR-0001 o Espejo veneciano..."
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          id="searchButton"
+          class="primary-button"
+        >
+          Buscar
+        </button>
+
+      </div>
+
+
+      <div
+        id="searchResults"
+        class="search-results"
+      ></div>
+
+    </section>
+
+
+    <!-- ===================================================
+         FORMULARIO DE PIEZA
+    ==================================================== -->
+
+    <section
+      id="formScreen"
+      class="screen"
+    >
+
+      <button
+        type="button"
+        class="back-button"
+        id="backFromForm"
+      >
+        ← Volver
+      </button>
+
+
+      <div class="page-heading">
+
+        <span
+          class="eyebrow"
+          id="formEyebrow"
+        >
+          NUEVA PIEZA
+        </span>
+
+        <h1 id="formTitle">
+          Registrar pieza
+        </h1>
+
+        <p id="formDescription">
+          Completa la información de la pieza.
+        </p>
+
+      </div>
+
+
+      <form
+        id="pieceForm"
+        class="piece-form"
+      >
+
+        <!-- =================================================
+             INFORMACIÓN GENERAL
+        ================================================== -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <span class="section-number">
+              01
+            </span>
+
+            <div>
+              <h2>
+                Información general
+              </h2>
+
+              <p>
+                Identificación básica de la pieza.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="sku">
+                SKU *
+              </label>
+
+              <input
+                type="text"
+                id="sku"
+                name="sku"
+                placeholder="VIR-0001"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="name">
+                Nombre de la pieza *
+              </label>
+
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Ej. Espejo veneciano"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="category">
+                Categoría *
+              </label>
+
+              <select
+                id="category"
+                name="category"
+                required
+              >
+
+                <option value="">
+                  Seleccionar
+                </option>
+
+                <option>
+                  Muebles
+                </option>
+
+                <option>
+                  Objetos
+                </option>
+
+                <option>
+                  Libros
+                </option>
+
+                <option>
+                  Arte
+                </option>
+
+                <option>
+                  Gráfica
+                </option>
+
+                <option>
+                  Otros
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="period">
+                Época
+              </label>
+
+              <input
+                type="text"
+                id="period"
+                name="period"
+                placeholder="Ej. Siglo XIX"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="origin">
+                Origen
+              </label>
+
+              <input
+                type="text"
+                id="origin"
+                name="origin"
+                placeholder="Ej. Francia"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="material">
+                Material
+              </label>
+
+              <input
+                type="text"
+                id="material"
+                name="material"
+                placeholder="Ej. Madera de nogal"
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MEDIDAS
+        ================================================== -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <span class="section-number">
+              02
+            </span>
+
+            <div>
+              <h2>
+                Medidas
+              </h2>
+
+              <p>
+                Dimensiones de la pieza.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid form-grid--four">
+
+            <div class="field">
+
+              <label for="height">
+                Alto
+              </label>
+
+              <div class="input-with-unit">
+
+                <input
+                  type="number"
+                  id="height"
+                  name="height"
+                  step="0.1"
+                  placeholder="0"
+                >
+
+                <span>
+                  cm
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="width">
+                Ancho
+              </label>
+
+              <div class="input-with-unit">
+
+                <input
+                  type="number"
+                  id="width"
+                  name="width"
+                  step="0.1"
+                  placeholder="0"
+                >
+
+                <span>
+                  cm
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="depth">
+                Profundidad
+              </label>
+
+              <div class="input-with-unit">
+
+                <input
+                  type="number"
+                  id="depth"
+                  name="depth"
+                  step="0.1"
+                  placeholder="0"
+                >
+
+                <span>
+                  cm
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="weight">
+                Peso
+              </label>
+
+              <div class="input-with-unit">
+
+                <input
+                  type="number"
+                  id="weight"
+                  name="weight"
+                  step="0.1"
+                  placeholder="0"
+                >
+
+                <span>
+                  kg
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DESCRIPCIÓN
+        ================================================== -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <span class="section-number">
+              03
+            </span>
+
+            <div>
+              <h2>
+                Descripción
+              </h2>
+
+              <p>
+                Información descriptiva de la pieza.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="description">
+              Descripción
+            </label>
+
+            <textarea
+              id="description"
+              name="description"
+              rows="7"
+              placeholder="Describe la pieza, materiales, características, detalles relevantes, procedencia, etc."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RESTAURACIÓN
+        ================================================== -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <span class="section-number">
+              04
+            </span>
+
+            <div>
+              <h2>
+                Restauración
+              </h2>
+
+              <p>
+                Define el tratamiento de la pieza.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="restoration">
+                Estado de restauración
+              </label>
+
+              <select
+                id="restoration"
+                name="restoration"
+              >
+
+                <option value="">
+                  Seleccionar
+                </option>
+
+                <option value="Sin restauración">
+                  No requiere restauración
+                </option>
+
+                <option value="Restauración interna">
+                  Restauración interna
+                </option>
+
+                <option value="Restaurador externo">
+                  Restaurador externo
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="restorer">
+                Restaurador
+              </label>
+
+              <input
+                type="text"
+                id="restorer"
+                name="restorer"
+                placeholder="Nombre del restaurador"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="status">
+                Estado de la pieza *
+              </label>
+
+              <select
+                id="status"
+                name="status"
+                required
+              >
+
+                <option value="">
+                  Seleccionar
+                </option>
+
+                <option value="Pendiente de revisión">
+                  Pendiente de revisión
+                </option>
+
+                <option value="En restauración">
+                  En restauración
+                </option>
+
+                <option value="Inventario">
+                  Inventario
+                </option>
+
+                <option value="Revisión interiorismo">
+                  Revisión interiorismo
+                </option>
+
+                <option value="Listo para tienda">
+                  Listo para tienda
+                </option>
+
+                <option value="Publicado">
+                  Publicado
+                </option>
+
+                <option value="Vendido">
+                  Vendido
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="price">
+                Precio de venta
+              </label>
+
+              <div class="price-input">
+
+                <span>
+                  $
+                </span>
+
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.00"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOTOS
+        ================================================== -->
+
+        <div class="form-section">
+
+          <div class="section-heading">
+
+            <span class="section-number">
+              05
+            </span>
+
+            <div>
+              <h2>
+                Fotografías
+              </h2>
+
+              <p>
+                Agrega fotografías de la pieza.
+              </p>
+            </div>
+
+          </div>
+
+
+          <label
+            for="photos"
+            class="upload-area"
+          >
+
+            <span class="upload-icon">
+              +
+            </span>
+
+            <strong>
+              Agregar fotografías
+            </strong>
+
+            <small>
+              JPG, PNG o WEBP
+            </small>
+
+          </label>
+
+          <input
+            type="file"
+            id="photos"
+            name="photos"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            hidden
+          >
+
+
+          <div
+            id="photoPreview"
+            class="photo-preview"
+          ></div>
+
+        </div>
+
+
+        <!-- =================================================
+             ACCIONES
+        ================================================== -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="secondary-button"
+            id="cancelForm"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="primary-button"
+          >
+            <span id="submitText">
+              Guardar pieza
+            </span>
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="site-footer">
+
+    <span>
+      VIRIATHUS
+    </span>
+
+    <span>
+      Sistema de gestión de inventario
+    </span>
+
+  </footer>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
